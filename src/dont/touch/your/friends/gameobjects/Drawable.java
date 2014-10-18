@@ -48,4 +48,24 @@ public abstract class Drawable {
 	public void goDown() {
 		this.pos.move(0,1);
 	}
+	
+	public void setRect(int x, int y) {
+		rect = new Rectangle(x, y);
+	}
+	
+	public void setRect(Rectangle r) {
+		rect = r;
+	}
+	
+	public boolean collidesWith(Drawable d) {
+		if((pos.getX() + rect.width < d.pos.getX()) && (pos.getY() + rect.height < d.pos.getY())) return false;
+		else if((pos.getX() + rect.width < d.pos.getX()) && (pos.getY() > d.pos.getY() + d.rect.height)) return false;
+		else if((pos.getX() > d.pos.getX() + d.rect.width) && (pos.getY() > d.pos.getY() + d.rect.height)) return false;
+		else if((pos.getX() > d.pos.getX() + d.rect.width) && (pos.getY() + rect.height < d.pos.getY())) return false;
+		else return true;
+	}
+
+	public void handleCollision(Drawable d2) {
+		System.out.println("Hey look, " + this + " collides with " + d2);
+	}
 }

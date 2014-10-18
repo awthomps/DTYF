@@ -21,8 +21,9 @@ public class World {
 		for(Drawable d1 : objects) {
 			for(Drawable d2 : objects) {
 				if(!d1.equals(d2)) {
-					
-					
+					if(d1.collidesWith(d2)) {
+						d1.handleCollision(d2);
+					}
 					
 				}
 			}
