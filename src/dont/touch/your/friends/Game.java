@@ -6,11 +6,11 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import java.util.List;
 
@@ -59,8 +59,6 @@ public class Game extends JFrame implements KeyListener{
 		try {
 			g = (Graphics2D) bs.getDrawGraphics();
 			render(g);
-			
-			g.drawRect(3, 3, 100, 100);
 			g.dispose();
 			bs.show();
 		}
@@ -71,14 +69,14 @@ public class Game extends JFrame implements KeyListener{
 
 	private void render(Graphics2D g) {
 		for(Drawable obj : objects) {
-			g.drawImage(obj.getBI(), 0, 0,null);
+			g.drawImage(obj.getBI(), 0, 0, 300, 300,null);
 		}
 	}
 	
 	
-	public void keyPressed(KeyEvent arg0) {
-		System.out.println(arg0);
-		switch(arg0.getKeyCode()) {
+	public void keyPressed(KeyEvent key) {
+		System.out.println(key);
+		switch(key.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
 			quit = true;
 			System.out.println("Now Exiting...");
@@ -88,12 +86,12 @@ public class Game extends JFrame implements KeyListener{
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent key) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(KeyEvent key) {
 		// TODO Auto-generated method stub
 	}
 }
