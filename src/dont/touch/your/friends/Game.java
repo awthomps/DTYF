@@ -46,6 +46,8 @@ public class Game extends JFrame implements KeyListener, JXInputAxisEventListene
 		//this.setBackground(Color.BLACK);
 		bs = this.getBufferStrategy();
 		
+		System.out.println(System.getProperty("java.library.path"));
+		
 		initJXInputControllers();
 		
 		quit = false;
