@@ -20,7 +20,7 @@ public class Game extends JFrame implements KeyListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final int NPC_COUNT = 4;
+	private static final int NPC_COUNT = 30;
 	private BufferStrategy bs;
 	private boolean quit;
 	private World world;
@@ -78,8 +78,8 @@ public class Game extends JFrame implements KeyListener{
 			world.drawMove();
 			drawStuff();
 			
-			playerOne.drawMove(null);
-			playerTwo.drawMove(null);
+			playerOne.drawMove();
+			playerTwo.drawMove();
 			
 			try {
 				Thread.sleep(12);

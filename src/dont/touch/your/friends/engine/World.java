@@ -9,18 +9,18 @@ import dont.touch.your.friends.gameobjects.Rando;
 
 public class World {
 	private LinkedList<Drawable> objects;
-	
+
 	public World() {
 		objects = new LinkedList<Drawable>();
 	}
-	
+
 	public void add(Drawable d) {
 		objects.add(d);
 	}
-	
+
 	public void checkCollisions() {
 		LinkedList<Drawable> toDelete = new LinkedList<Drawable>();
-		
+
 		for(Drawable d1 : objects) {
 			for(Drawable d2 : objects) {
 				//make sure they aren't the same exact object:
@@ -28,36 +28,27 @@ public class World {
 					if(d1.collidesWith(d2)) {
 						d1.handleCollision(d2);
 					}
-					
+
 				}
 			}
 		}
 	}
-	
+
 	public void render(Graphics2D g) {
 		for(Drawable obj : objects) {
 			g.drawImage(obj.getBI(), (int) obj.getX(), (int) obj.getY(), Drawable.DRAWUNIT, Drawable.DRAWUNIT,null);
 		}
 	}
-	
+
 	/**
 	 * for(int i = 0; i < NPC_COUNT; i++){
 				oneNPC[i].drawMove(playerTwo.getVector());
 			}
 	 */
-	
+
 	public void drawMove() {
 		for(Drawable d : objects) {
-			if(d instanceof Rando){
-				if(objects.get(1) instanceof Player) {
-					Player player = (Player) objects.get(1);
-					d.drawMove(player.getVector());
-				}
-				
-			}
-			else {
-				d.drawMove(null);
-			}
+			d.drawMove();
 		}
 	}
 }

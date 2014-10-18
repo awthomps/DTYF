@@ -13,7 +13,7 @@ public abstract class Drawable {
 
 	public boolean[] state = new boolean[6];
 
-	private Vector2 prevPos = new Vector2(0,0);
+	protected Vector2 prevPos = new Vector2(0,0);
 	
 	protected static final int STATE_COUNT = 5;
 	
@@ -25,7 +25,7 @@ public abstract class Drawable {
 	public static final int RUN = 5;
 	
 	
-	private int speed = 5;
+	protected int speed = 5;
 	protected int imageChunk;
 	protected Rectangle rect;
 	protected Vector2 pos;
@@ -90,7 +90,7 @@ public abstract class Drawable {
 		System.out.println("Hey look, " + this + " collides with " + d2);
 	}
 
-	public void drawMove(Vector2 chaseVector){
+	public void drawMove(){
 		Vector2 move = new Vector2(0,0);
 		
 		if(state[LEFT])
@@ -101,10 +101,6 @@ public abstract class Drawable {
 			move = move.add(new Vector2(0,1));
 		if(state[UP])
 			move = move.add(new Vector2(0,-1));
-		if(state[CHASE])
-			move = chaseVector.sub(pos);
-		if(state[RUN])
-			move = pos.sub(chaseVector);
 		
 		
 		if(move.magnitude() > 0) {
