@@ -16,6 +16,10 @@ public class Player extends Drawable {
 		this(uri, 0, 0);
 	}
 	
+	public Vector2 getVector(){
+		return pos;
+	}
+	
 	public Player(String uri, int startX, int startY) throws IOException {
 		super();
 		isTagged = false;
