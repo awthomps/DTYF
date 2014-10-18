@@ -1,5 +1,6 @@
 package dont.touch.your.friends.image;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 
@@ -22,8 +23,8 @@ public class ImageManager {
 		chunks = new ArrayList<ImageChunk>();
 	}
 	
-	public void add(String imageNames, int number) {
-		ImageChunk ic = new ImageChunk(imageNames, number);
+	public void add(String imageNames, int number, Rectangle bounds) {
+		ImageChunk ic = new ImageChunk(imageNames, number, bounds);
 		chunks.add(ic);
 	}
 	

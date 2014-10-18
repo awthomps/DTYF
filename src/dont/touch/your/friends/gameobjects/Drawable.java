@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import dont.touch.your.friends.engine.Vector2;
-import dont.touch.your.friends.image.ImageChunk;
 import dont.touch.your.friends.image.ImageManager;
 
 public abstract class Drawable {
@@ -30,12 +29,20 @@ public abstract class Drawable {
 	protected Rectangle rect;
 	protected Vector2 pos;
 	protected int currentFrame;
+
 	Type type;
+
+	private boolean toDelete;
 
 	protected Drawable(){
 		pos = new Vector2(0,0);
 		rect = new Rectangle();
 		currentFrame = 0;
+		toDelete = false;
+	}
+	
+	public void initCollision() {
+		rect = ImageManager.imageManager.getChunk(imageChunk).getBounds();
 	}
 
 	public BufferedImage getBI() {
@@ -78,16 +85,28 @@ public abstract class Drawable {
 		rect = r;
 	}
 
-	public boolean collidesWith(Drawable d) {
-		if((pos.getX() + rect.width < d.pos.getX()) && (pos.getY() + rect.height < d.pos.getY())) return false;
-		else if((pos.getX() + rect.width < d.pos.getX()) && (pos.getY() > d.pos.getY() + d.rect.height)) return false;
-		else if((pos.getX() > d.pos.getX() + d.rect.width) && (pos.getY() > d.pos.getY() + d.rect.height)) return false;
-		else if((pos.getX() > d.pos.getX() + d.rect.width) && (pos.getY() + rect.height < d.pos.getY())) return false;
-		else return true;
+	public boolean testCollision(Drawable d) {
+		Rectangle r1 = new Rectangle(rect);
+		r1.setLocation((int) pos.getX(),(int) pos.getY());
+		
+		Rectangle r2 = new Rectangle(d.rect);
+		r2.setLocation((int) d.pos.getX(),(int) d.pos.getY());
+		
+		if(r1.intersects(r2)) return true;
+		else return false;
 	}
 
 	public void handleCollision(Drawable d2) {
-		System.out.println("Hey look, " + this + " collides with " + d2);
+		/**
+		 * TODO: handle what to do for each object. This can be overwritten in child classes
+		 */
+		
+		if(this instanceof Player && d2 instanceof Player)
+			System.out.println("Hey look, " + this + " collides with " + d2);
+	}
+	
+	public boolean markedForDeletion() {
+		return toDelete;
 	}
 
 	public void drawMove(){

@@ -19,18 +19,31 @@ public class World {
 	}
 
 	public void checkCollisions() {
-		LinkedList<Drawable> toDelete = new LinkedList<Drawable>();
-
+		//Do a sweep to check collisions:
 		for(Drawable d1 : objects) {
 			for(Drawable d2 : objects) {
 				//make sure they aren't the same exact object:
-				if(d1 != d2) {
-					if(d1.collidesWith(d2)) {
-						d1.handleCollision(d2);
-					}
-
+				if(d1 != d2 && d1.testCollision(d2)) {
+					d1.handleCollision(d2);
 				}
 			}
+		}
+		
+		LinkedList<Drawable> toDelete = new LinkedList<Drawable>();
+		//do another sweep for individual objects to handle their own collisions:
+		for(Drawable d : objects) {
+			if(d.markedForDeletion()) toDelete.add(d);
+		}
+		
+		//do a sweep to see if anything should be deleted finally:
+		//TODO: also this is untested! :3
+		if(toDelete.size() > 0) objects.removeAll(toDelete);
+	}
+	
+	//Must be declared after all images are loaded
+	public void initCollision() {
+		for(Drawable d : objects) {
+			d.initCollision();
 		}
 	}
 
