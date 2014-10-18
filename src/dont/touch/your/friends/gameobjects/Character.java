@@ -1,5 +1,8 @@
 package dont.touch.your.friends.gameobjects;
 
-public class Character {
+import java.awt.image.BufferedImage;
 
+public class Character {
+	private BufferedImage image;
+	
 }
