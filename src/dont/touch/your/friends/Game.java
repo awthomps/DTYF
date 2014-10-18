@@ -1,14 +1,10 @@
 package dont.touch.your.friends;
 
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -28,8 +24,8 @@ public class Game extends JFrame implements KeyListener{
 	private boolean quit;
 	private List<Drawable> objects = new LinkedList<Drawable>();
 	private Player playerOne;
-	private boolean[] playerOneState = new boolean[256];
-	private int playerOneSpeed = 5;
+	private Player playerTwo;
+
 	public Game() throws IOException {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setUndecorated(true);
@@ -44,8 +40,10 @@ public class Game extends JFrame implements KeyListener{
 		quit = false;
 		
 		playerOne = new Player("res/test/sample image.png");
+		playerTwo = new Player("res/test/sample image.png", this.getWidth() - 50, 0);
 		
 		objects.add(playerOne);
+		objects.add(playerTwo);
 		
 		gameLoop();
 	}
@@ -55,14 +53,9 @@ public class Game extends JFrame implements KeyListener{
 		while(!quit) {
 			drawStuff();
 			
-			if(playerOneState[KeyEvent.VK_LEFT])
-				playerOne.goLeft(playerOneSpeed);
-			if(playerOneState[KeyEvent.VK_RIGHT])
-				playerOne.goRight(playerOneSpeed);
-			if(playerOneState[KeyEvent.VK_DOWN])
-				playerOne.goDown(playerOneSpeed);
-			if(playerOneState[KeyEvent.VK_UP])
-				playerOne.goUp(playerOneSpeed);
+			playerOne.drawMove();
+			playerTwo.drawMove();
+
 			
 			
 			try {
@@ -104,8 +97,29 @@ public class Game extends JFrame implements KeyListener{
 		case KeyEvent.VK_ESCAPE:
 			quit = true;
 			break;
-		default:
-			playerOneState[key.getKeyCode()] = true;
+		case KeyEvent.VK_W:
+			playerOne.state[Drawable.UP] = true;
+			break;
+		case KeyEvent.VK_A:
+			playerOne.state[Drawable.LEFT] = true;
+			break;
+		case KeyEvent.VK_S:
+			playerOne.state[Drawable.DOWN] = true;
+			break;
+		case KeyEvent.VK_D:
+			playerOne.state[Drawable.RIGHT] = true;
+			break;
+		case KeyEvent.VK_UP:
+			playerTwo.state[Drawable.UP] = true;
+			break;
+		case KeyEvent.VK_DOWN:
+			playerTwo.state[Drawable.DOWN] = true;
+			break;
+		case KeyEvent.VK_LEFT:
+			playerTwo.state[Drawable.LEFT] = true;
+			break;
+		case KeyEvent.VK_RIGHT:
+			playerTwo.state[Drawable.RIGHT] = true;
 			break;
 		}
 		
@@ -113,7 +127,33 @@ public class Game extends JFrame implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent key) {
-		// TODO Auto-generated method stub
+		//System.out.println(key.getKeyCode());
+		switch(key.getKeyCode()) {
+		case KeyEvent.VK_W:
+			playerOne.state[Drawable.UP] = false;
+			break;
+		case KeyEvent.VK_A:
+			playerOne.state[Drawable.LEFT] = false;
+			break;
+		case KeyEvent.VK_S:
+			playerOne.state[Drawable.DOWN] = false;
+			break;
+		case KeyEvent.VK_D:
+			playerOne.state[Drawable.RIGHT] = false;
+			break;
+		case KeyEvent.VK_UP:
+			playerTwo.state[Drawable.UP] = false;
+			break;
+		case KeyEvent.VK_DOWN:
+			playerTwo.state[Drawable.DOWN] = false;
+			break;
+		case KeyEvent.VK_LEFT:
+			playerTwo.state[Drawable.LEFT] = false;
+			break;
+		case KeyEvent.VK_RIGHT:
+			playerTwo.state[Drawable.RIGHT] = false;
+			break;
+		}
 	}
 
 	@Override
