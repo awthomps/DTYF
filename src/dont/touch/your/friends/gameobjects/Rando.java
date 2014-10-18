@@ -5,7 +5,6 @@ package dont.touch.your.friends.gameobjects;
 
 import java.io.IOException;
 import java.util.Random;
-
 import dont.touch.your.friends.engine.Vector2;
 
 /**

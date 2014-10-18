@@ -19,6 +19,8 @@ public class Game extends JFrame implements KeyListener{
 	/**
 	 * 
 	 */
+	
+	private static long frameTime = 17;
 	private static final long serialVersionUID = 1L;
 	private static final int NPC_COUNT = 300;
 	private BufferStrategy bs;
@@ -79,8 +81,9 @@ public class Game extends JFrame implements KeyListener{
 	}
 	
 	private void gameLoop() {
-		
+		long startTime = 0;
 		while(!quit) {
+			startTime = System.currentTimeMillis();
 			world.drawMove();
 			drawStuff();
 			
@@ -88,7 +91,11 @@ public class Game extends JFrame implements KeyListener{
 			playerTwo.drawMove();
 			
 			try {
-				Thread.sleep(12);
+				
+				
+				long sleepTime = frameTime - (System.currentTimeMillis() - startTime);
+				if(sleepTime < 0) sleepTime = 0;
+				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
