@@ -29,7 +29,7 @@ public class Game extends JFrame implements KeyListener{
 		this.createBufferStrategy(2);
 		this.addKeyListener(this);
 		this.setTitle("DTYF");
-		this.setBackground(Color.BLACK);
+		//this.setBackground(Color.BLACK);
 		bs = this.getBufferStrategy();
 		quit = false;
 		
@@ -49,6 +49,8 @@ public class Game extends JFrame implements KeyListener{
 				e.printStackTrace();
 			}
 		}
+		this.setVisible(false);
+		this.dispose();
 		System.exit(0);
 	}
 	
@@ -57,6 +59,8 @@ public class Game extends JFrame implements KeyListener{
 		try {
 			g = (Graphics2D) bs.getDrawGraphics();
 			render(g);
+			
+			g.drawRect(3, 3, 100, 100);
 			g.dispose();
 			bs.show();
 		}
