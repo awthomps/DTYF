@@ -7,7 +7,15 @@ import javax.imageio.ImageIO;
 
 public class Player extends Drawable {
 	
+	// Determines if the player character is tagged
+	boolean isTagged;
+	
 	public Player(String uri) throws IOException {
+		super();
+		
 		bi = ImageIO.read(new File(uri));
+		
+		// This is the position of the player.  Should be different per player
+		pos.set(0, 0);
 	}
 }

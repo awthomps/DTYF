@@ -12,11 +12,40 @@ public abstract class Drawable {
 	protected Vector2 pos;
 	Type type;
 	
+	protected Drawable(){
+		pos = new Vector2(0,0);
+		rect = new Rectangle();
+	}
+	
 	public BufferedImage getBI() {
 		return bi;
 	}
 	
+	public double getX(){
+		return pos.getX();
+	}
+	
+	public double getY(){
+		return pos.getY();
+	}	
+	
 	public void setPosition(float x, float y) {
 		pos.set(x, y);
+	}
+	
+	public void goLeft() {
+		this.pos.move(-1,0);
+	}
+	
+	public void goRight() {
+		this.pos.move(1,0);
+	}
+	
+	public void goUp() {
+		this.pos.move(0,-1);
+	}
+	
+	public void goDown() {
+		this.pos.move(0,1);
 	}
 }

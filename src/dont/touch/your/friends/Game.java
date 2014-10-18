@@ -21,6 +21,7 @@ public class Game extends JFrame implements KeyListener{
 	private BufferStrategy bs;
 	private boolean quit;
 	private List<Drawable> objects = new LinkedList<Drawable>();
+	private Player playerOne;
 	public Game() throws IOException {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setUndecorated(true);
@@ -33,7 +34,9 @@ public class Game extends JFrame implements KeyListener{
 		bs = this.getBufferStrategy();
 		quit = false;
 		
-		objects.add(new Player("res/test/sample image.png"));
+		playerOne = new Player("res/test/sample image.png");
+		
+		objects.add(playerOne);
 		
 		gameLoop();
 	}
@@ -69,7 +72,7 @@ public class Game extends JFrame implements KeyListener{
 
 	private void render(Graphics2D g) {
 		for(Drawable obj : objects) {
-			g.drawImage(obj.getBI(), 0, 0, 300, 300,null);
+			g.drawImage(obj.getBI(), (int) obj.getX(), (int) obj.getY(), 300, 300,null);
 		}
 	}
 	
@@ -80,6 +83,18 @@ public class Game extends JFrame implements KeyListener{
 		case KeyEvent.VK_ESCAPE:
 			quit = true;
 			System.out.println("Now Exiting...");
+			break;
+		case KeyEvent.VK_LEFT:
+			playerOne.goLeft();
+			break;
+		case KeyEvent.VK_DOWN:
+			playerOne.goDown();
+			break;
+		case KeyEvent.VK_UP:
+			playerOne.goUp();
+			break;
+		case KeyEvent.VK_RIGHT:
+			playerOne.goRight();
 			break;
 		}
 		
