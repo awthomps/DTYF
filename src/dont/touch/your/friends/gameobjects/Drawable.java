@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import dont.touch.your.friends.engine.Vector2;
+import dont.touch.your.friends.image.ImageChunk;
+import dont.touch.your.friends.image.ImageManager;
 
 public abstract class Drawable {
 	public enum Type { Player1, Player2, Player3, Player4, Rando};
@@ -22,18 +24,20 @@ public abstract class Drawable {
 	
 	
 	private int speed = 5;
-	protected BufferedImage bi;
+	protected int imageChunk;
 	protected Rectangle rect;
 	protected Vector2 pos;
+	protected int currentFrame;
 	Type type;
 
 	protected Drawable(){
 		pos = new Vector2(0,0);
 		rect = new Rectangle();
+		currentFrame = 0;
 	}
 
 	public BufferedImage getBI() {
-		return bi;
+		return ImageManager.imageManager.getChunk(imageChunk).getImageByIndex(currentFrame);
 	}
 
 	public double getX(){
@@ -86,7 +90,6 @@ public abstract class Drawable {
 
 	public void drawMove(){
 		Vector2 move = new Vector2(0,0);
-		prevPos.set(pos);
 		
 		if(state[LEFT])
 			move = move.add(new Vector2(-1,0));
@@ -96,6 +99,10 @@ public abstract class Drawable {
 			move = move.add(new Vector2(0,1));
 		if(state[UP])
 			move = move.add(new Vector2(0,-1));
+		
+		if(move.magnitude() > 0) {
+			prevPos.set(pos);
+		}
 		
 		move.normalize();
 		move = move.scale(speed);

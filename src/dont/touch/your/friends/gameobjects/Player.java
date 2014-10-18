@@ -6,20 +6,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import dont.touch.your.friends.engine.Vector2;
+import dont.touch.your.friends.image.ImageChunk;
 
 public class Player extends Drawable {
 	
 	// Determines if the player character is tagged
 	private boolean isTagged;
 	
-	public Player(String uri) throws IOException {
-		this(uri, 0, 0);
+	public Player(int ic) throws IOException {
+		this(ic, 0, 0);
 	}
 	
-	public Player(String uri, int startX, int startY) throws IOException {
+	public Player(int ic, int startX, int startY) throws IOException {
 		super();
 		isTagged = false;
-		bi = ImageIO.read(new File(uri));
+		imageChunk = ic;
 		
 		// This is the position of the player.  Should be different per player
 		pos.set(startX, startY);

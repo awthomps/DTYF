@@ -12,8 +12,10 @@ import javax.swing.JFrame;
 
 import java.util.List;
 
+import dont.touch.your.friends.engine.World;
 import dont.touch.your.friends.gameobjects.Drawable;
 import dont.touch.your.friends.gameobjects.Player;
+import dont.touch.your.friends.image.ImageManager;
 
 public class Game extends JFrame implements KeyListener{
 	/**
@@ -22,7 +24,7 @@ public class Game extends JFrame implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	private BufferStrategy bs;
 	private boolean quit;
-	private List<Drawable> objects = new LinkedList<Drawable>();
+	private World world;
 	private Player playerOne;
 	private Player playerTwo;
 
@@ -39,24 +41,35 @@ public class Game extends JFrame implements KeyListener{
 		
 		quit = false;
 		
-		playerOne = new Player("res/test/sample image.png");
-		playerTwo = new Player("res/test/sample image.png", this.getWidth() - 50, 0);
+		loadGraphics();
 		
-		objects.add(playerOne);
-		objects.add(playerTwo);
+		initWorld();
 		
 		gameLoop();
+	}
+
+	private void loadGraphics() {
+		ImageManager.imageManager.add("", 1);
+		ImageManager.imageManager.add("", 1);
+		
+	}
+
+	private void initWorld() throws IOException {
+		world = new World();
+		
+		playerOne = new Player(ImageManager.PLAYER1IMAGE);
+		playerTwo = new Player(ImageManager.PLAYER2IMAGE, this.getWidth() - 50, 0);
+		
+		world.add(playerOne);
+		world.add(playerTwo);
 	}
 	
 	private void gameLoop() {
 		
 		while(!quit) {
-			drawStuff();
-			
-			playerOne.drawMove();
-			playerTwo.drawMove();
+			world.drawMove();
 
-			
+			drawStuff();
 			
 			try {
 				Thread.sleep(12);
@@ -73,7 +86,7 @@ public class Game extends JFrame implements KeyListener{
 		Graphics2D g;
 		try {
 			g = (Graphics2D) bs.getDrawGraphics();
-			render(g);
+			world.render(g);
 			g.dispose();
 			bs.show();
 		}
@@ -82,11 +95,7 @@ public class Game extends JFrame implements KeyListener{
 		}
 	}
 
-	private void render(Graphics2D g) {
-		for(Drawable obj : objects) {
-			g.drawImage(obj.getBI(), (int) obj.getX(), (int) obj.getY(), Drawable.DRAWUNIT, Drawable.DRAWUNIT,null);
-		}
-	}
+	
 	
 	
 	public void keyPressed(KeyEvent key) {
