@@ -33,20 +33,20 @@ public abstract class Drawable {
 		pos.set(x, y);
 	}
 	
-	public void goLeft() {
-		this.pos.move(-1,0);
+	public void goLeft(int magnitude) {
+		this.pos.move(-magnitude,0);
 	}
 	
-	public void goRight() {
-		this.pos.move(1,0);
+	public void goRight(int magnitude) {
+		this.pos.move(magnitude,0);
 	}
 	
-	public void goUp() {
-		this.pos.move(0,-1);
+	public void goUp(int magnitude) {
+		this.pos.move(0,-magnitude);
 	}
 	
-	public void goDown() {
-		this.pos.move(0,1);
+	public void goDown(int magnitude) {
+		this.pos.move(0,magnitude);
 	}
 	
 	public void setRect(int x, int y) {

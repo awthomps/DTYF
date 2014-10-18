@@ -22,6 +22,8 @@ public class Game extends JFrame implements KeyListener{
 	private boolean quit;
 	private List<Drawable> objects = new LinkedList<Drawable>();
 	private Player playerOne;
+	private boolean[] playerOneState = new boolean[256];
+	private int playerOneSpeed = 5;
 	public Game() throws IOException {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setUndecorated(true);
@@ -45,6 +47,17 @@ public class Game extends JFrame implements KeyListener{
 		
 		while(!quit) {
 			drawStuff();
+			
+			if(playerOneState[KeyEvent.VK_LEFT])
+				playerOne.goLeft(playerOneSpeed);
+			if(playerOneState[KeyEvent.VK_RIGHT])
+				playerOne.goRight(playerOneSpeed);
+			if(playerOneState[KeyEvent.VK_DOWN])
+				playerOne.goDown(playerOneSpeed);
+			if(playerOneState[KeyEvent.VK_UP])
+				playerOne.goUp(playerOneSpeed);
+			
+			
 			try {
 				Thread.sleep(12);
 			} catch (InterruptedException e) {
@@ -79,22 +92,14 @@ public class Game extends JFrame implements KeyListener{
 	
 	public void keyPressed(KeyEvent key) {
 		System.out.println(key);
+
 		switch(key.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
 			quit = true;
 			System.out.println("Now Exiting...");
 			break;
-		case KeyEvent.VK_LEFT:
-			playerOne.goLeft();
-			break;
-		case KeyEvent.VK_DOWN:
-			playerOne.goDown();
-			break;
-		case KeyEvent.VK_UP:
-			playerOne.goUp();
-			break;
-		case KeyEvent.VK_RIGHT:
-			playerOne.goRight();
+		default:
+			playerOneState[key.getKeyCode()] = true;
 			break;
 		}
 		
@@ -109,4 +114,6 @@ public class Game extends JFrame implements KeyListener{
 	public void keyTyped(KeyEvent key) {
 		// TODO Auto-generated method stub
 	}
+	
+	
 }
