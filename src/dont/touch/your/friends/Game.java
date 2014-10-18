@@ -20,7 +20,7 @@ public class Game extends JFrame implements KeyListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final int NPC_COUNT = 30;
+	private static final int NPC_COUNT = 300;
 	private BufferStrategy bs;
 	private boolean quit;
 	private World world;
@@ -28,6 +28,7 @@ public class Game extends JFrame implements KeyListener{
 	private Player playerTwo;
 	
 	private Rando[] oneNPC = new Rando[NPC_COUNT];
+	private Rando[] twoNPC = new Rando[NPC_COUNT];
 	
 
 	public Game() throws IOException {
@@ -69,6 +70,11 @@ public class Game extends JFrame implements KeyListener{
 		for(int i = 0; i < NPC_COUNT; i++){
 			oneNPC[i] = new Rando(ImageManager.RANDO, playerOne, playerTwo, this.getWidth()/2, this.getHeight()/2);
 			world.add(oneNPC[i]);
+		}
+		
+		for(int i = 0; i < NPC_COUNT; i++){
+			twoNPC[i] = new Rando(ImageManager.RANDO, playerTwo, playerOne, this.getWidth()/2, this.getHeight()/2);
+			world.add(twoNPC[i]);
 		}
 	}
 	

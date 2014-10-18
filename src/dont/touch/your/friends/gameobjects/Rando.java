@@ -16,10 +16,10 @@ public class Rando extends Drawable{
 
 	private Player myPlayer;
 	private Player chasePlayer;
-	private static final int minRandomTimer = 5;
-	private static final int maxRandomTimer = 25;
+	private static final int minRandomTimer = 80;
+	private static final int maxRandomTimer = 150;
 	private int timeSinceRefresh = 0;
-	private static final int SWARM_DISTANCE = 300;
+	private static final int SWARM_DISTANCE = 150;
 
 
 
@@ -33,10 +33,11 @@ public class Rando extends Drawable{
 	}
 
 	public void Randomize(){
+		Random randGen = new Random();
 		for(int i = 0; i < STATE_COUNT; i++){
 			state[i] = false;
 		}
-		state[(int) (System.currentTimeMillis() % 6)] = true;
+		state[randGen.nextInt(6)] = true;
 
 	}
 
