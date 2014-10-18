@@ -14,6 +14,7 @@ public class ImageManager {
 	 */
 	public static int PLAYER1IMAGE = 0;
 	public static int PLAYER2IMAGE = 1;
+	public static int RANDO = 2;
 	
 	private ArrayList<ImageChunk> chunks;
 	

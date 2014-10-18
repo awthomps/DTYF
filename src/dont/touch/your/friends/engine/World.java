@@ -40,9 +40,24 @@ public class World {
 		}
 	}
 	
+	/**
+	 * for(int i = 0; i < NPC_COUNT; i++){
+				oneNPC[i].drawMove(playerTwo.getVector());
+			}
+	 */
+	
 	public void drawMove() {
 		for(Drawable d : objects) {
-			d.drawMove();
+			if(d instanceof Rando){
+				if(objects.get(1) instanceof Player) {
+					Player player = (Player) objects.get(1);
+					d.drawMove(player.getVector());
+				}
+				
+			}
+			else {
+				d.drawMove(null);
+			}
 		}
 	}
 }

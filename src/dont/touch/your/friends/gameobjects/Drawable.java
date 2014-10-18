@@ -15,6 +15,8 @@ public abstract class Drawable {
 
 	private Vector2 prevPos = new Vector2(0,0);
 	
+	protected static final int STATE_COUNT = 5;
+	
 	public static final int LEFT = 0;
 	public static final int DOWN = 1;
 	public static final int UP = 2;
@@ -88,7 +90,7 @@ public abstract class Drawable {
 		System.out.println("Hey look, " + this + " collides with " + d2);
 	}
 
-	public void drawMove(){
+	public void drawMove(Vector2 chaseVector){
 		Vector2 move = new Vector2(0,0);
 		
 		if(state[LEFT])
@@ -99,6 +101,11 @@ public abstract class Drawable {
 			move = move.add(new Vector2(0,1));
 		if(state[UP])
 			move = move.add(new Vector2(0,-1));
+		if(state[CHASE])
+			move = chaseVector.sub(pos);
+		if(state[RUN])
+			move = pos.sub(chaseVector);
+		
 		
 		if(move.magnitude() > 0) {
 			prevPos.set(pos);

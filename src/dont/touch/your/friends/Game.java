@@ -6,27 +6,29 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
-import java.util.LinkedList;
-
 import javax.swing.JFrame;
-
-import java.util.List;
 
 import dont.touch.your.friends.engine.World;
 import dont.touch.your.friends.gameobjects.Drawable;
 import dont.touch.your.friends.gameobjects.Player;
 import dont.touch.your.friends.image.ImageManager;
+import dont.touch.your.friends.gameobjects.Rando;
+
 
 public class Game extends JFrame implements KeyListener{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final int NPC_COUNT = 4;
 	private BufferStrategy bs;
 	private boolean quit;
 	private World world;
 	private Player playerOne;
 	private Player playerTwo;
+	
+	private Rando[] oneNPC = new Rando[NPC_COUNT];
+	
 
 	public Game() throws IOException {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +53,7 @@ public class Game extends JFrame implements KeyListener{
 	private void loadGraphics() {
 		ImageManager.imageManager.add("", 1);
 		ImageManager.imageManager.add("", 1);
-		
+		ImageManager.imageManager.add("", 1);
 	}
 
 	private void initWorld() throws IOException {
@@ -60,16 +62,24 @@ public class Game extends JFrame implements KeyListener{
 		playerOne = new Player(ImageManager.PLAYER1IMAGE);
 		playerTwo = new Player(ImageManager.PLAYER2IMAGE, this.getWidth() - 50, 0);
 		
+		
 		world.add(playerOne);
 		world.add(playerTwo);
+		
+		for(int i = 0; i < NPC_COUNT; i++){
+			oneNPC[i] = new Rando(ImageManager.RANDO, playerOne, playerTwo, this.getWidth()/2, this.getHeight()/2);
+			world.add(oneNPC[i]);
+		}
 	}
 	
 	private void gameLoop() {
 		
 		while(!quit) {
 			world.drawMove();
-
 			drawStuff();
+			
+			playerOne.drawMove(null);
+			playerTwo.drawMove(null);
 			
 			try {
 				Thread.sleep(12);
@@ -99,9 +109,7 @@ public class Game extends JFrame implements KeyListener{
 	
 	
 	public void keyPressed(KeyEvent key) {
-		System.out.println(key);
 
-		//System.out.println(key.getKeyCode());
 		switch(key.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
 			quit = true;
@@ -130,13 +138,14 @@ public class Game extends JFrame implements KeyListener{
 		case KeyEvent.VK_RIGHT:
 			playerTwo.state[Drawable.RIGHT] = true;
 			break;
+
 		}
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent key) {
-		//System.out.println(key.getKeyCode());
+
 		switch(key.getKeyCode()) {
 		case KeyEvent.VK_W:
 			playerOne.state[Drawable.UP] = false;
@@ -162,6 +171,7 @@ public class Game extends JFrame implements KeyListener{
 		case KeyEvent.VK_RIGHT:
 			playerTwo.state[Drawable.RIGHT] = false;
 			break;
+
 		}
 	}
 

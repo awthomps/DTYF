@@ -34,13 +34,9 @@ public class Vector2 {
 	}
 	public Vector2 add(Vector2 b) {
 		Vector2 result = new Vector2();
-		System.err.println("first vector from add is " + v[0] + " " + v[1]);
-		System.err.println("second vector from add is " + b.v[0] + " " + b.v[1]);
 		for(int i = 0; i < 2; ++i) {
 			result.v[i] = v[i] + b.v[i];
 		}
-
-		System.err.println("result vector from add is " + result.v[0] + " " + result.v[1]);
 		return result;
 	}
 

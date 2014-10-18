@@ -3,80 +3,47 @@
  */
 package dont.touch.your.friends.gameobjects;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 /**
  * @author Zack
  *
  */
 public class Rando extends Drawable{
-	public static final int PATH_AMOUNT = 6;
-	public static final int LEFT = 0;
-	public static final int RIGHT = 1;
-	public static final int UP = 2;
-	public static final int DOWN = 3;
-	public static final int CHASE = 4;
-	public static final int RUN = 5;
 	
-	private int path;
-	private int type;
+	private Player myPlayer;
+	private Player chasePlayer;
 
-	// rando goes left
-	private void left(){
-		path = 0;
+	/*
+	 * 
+	 * public Player(int ic, int startX, int startY) {
+		super();
+		isTagged = false;
+		imageChunk = ic;
+		
+		// This is the position of the player.  Should be different per player
+		pos.set(startX, startY);
 	}
-
-	private void right(){
-		path = 1;
+	 */
+	
+	
+	public Rando(int ic, Player myPlayer, Player chasePlayer, int startX, int startY) throws IOException{
+		super();
+		imageChunk = ic;
+		this.myPlayer = myPlayer;
+		this.chasePlayer = chasePlayer;
+		pos.set(startX, startY);
+		this.Randomize();
 	}
-
-	private void up(){
-		path = 2;
-	}
-
-	private void down(){
-		path = 3;
-	}
-
-	private void chase(){
-		path = 4;
-	}
-
-	private void run(){
-		path = 5;
-	}
-
-	public void setPath(int path){
-		switch(path){
-		case 0:
-			left();
-			break;
-		case 1:
-			right();
-			break;
-		case 2:
-			up();
-			break;
-		case 3:
-			down();
-			break;
-		case 4:
-			chase();
-			break;
-		case 5:
-			run();
-			break;
+	
+	public void Randomize(){
+		for(int i = 0; i < STATE_COUNT; i++){
+			state[i] = false;
 		}
-	}
-
-	public int getPath(){
-		return path;
-	}
-
-	public int getType(){
-		return type;
-	}
-	
-	public Rando(int path, int type){
-		this.path = path;
-		this.type = type;
+		state[(int) (System.currentTimeMillis() % 6)] = true;
+		
 	}
 }
