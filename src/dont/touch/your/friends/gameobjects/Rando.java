@@ -20,17 +20,6 @@ public class Rando extends Drawable{
 	private Player chasePlayer;
 	private static final int SWARM_DISTANCE = 100;
 
-	/*
-	 * 
-	 * public Player(int ic, int startX, int startY) {
-		super();
-		isTagged = false;
-		imageChunk = ic;
-		
-		// This is the position of the player.  Should be different per player
-		pos.set(startX, startY);
-	}
-	 */
 	
 	
 	public Rando(int ic, Player myPlayer, Player chasePlayer, int startX, int startY) throws IOException{
