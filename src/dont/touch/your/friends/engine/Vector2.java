@@ -69,6 +69,13 @@ public class Vector2 {
 		v[1] = y;
 	}
 
+	public String toString() {
+		return "Vector2( " + v[0] + ", " + v[1] + ")";
+	}
+	public void print() {
+		System.out.println(toString());
+	}
+
 	public void set(Vector2 vector){
 		this.set(vector.v[0], vector.v[1]);
 	}
