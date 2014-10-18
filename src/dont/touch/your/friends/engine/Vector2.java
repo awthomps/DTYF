@@ -55,4 +55,11 @@ public class Vector2 {
 		v[0] = x;
 		v[1] = y;
 	}
+	
+	public String toString() {
+		return "Vector2( " + v[0] + ", " + v[1] + ")";
+	}
+	public void print() {
+		System.out.println(toString());
+	}
 }
