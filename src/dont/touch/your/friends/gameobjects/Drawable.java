@@ -6,6 +6,7 @@ import dont.touch.your.friends.engine.Vector2;
 
 public abstract class Drawable {
 	public enum Type { Player1, Player2, Player3, Player4, Rando};
+	public static int DRAWUNIT = 50;
 	
 	protected BufferedImage bi;
 	protected Rectangle rect;

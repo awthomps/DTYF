@@ -3,6 +3,8 @@ package dont.touch.your.friends;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
@@ -18,6 +20,10 @@ import dont.touch.your.friends.gameobjects.Drawable;
 import dont.touch.your.friends.gameobjects.Player;
 
 public class Game extends JFrame implements KeyListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private BufferStrategy bs;
 	private boolean quit;
 	private List<Drawable> objects = new LinkedList<Drawable>();
@@ -26,14 +32,15 @@ public class Game extends JFrame implements KeyListener{
 	private int playerOneSpeed = 5;
 	public Game() throws IOException {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setUndecorated(true);
-		this.setSize(800,600);
+		this.setUndecorated(true);
+		this.setSize(1280,720);
 		this.setVisible(true);
 		this.createBufferStrategy(2);
 		this.addKeyListener(this);
 		this.setTitle("DTYF");
 		//this.setBackground(Color.BLACK);
 		bs = this.getBufferStrategy();
+		
 		quit = false;
 		
 		playerOne = new Player("res/test/sample image.png");
@@ -67,7 +74,6 @@ public class Game extends JFrame implements KeyListener{
 		}
 		this.setVisible(false);
 		this.dispose();
-		System.exit(0);
 	}
 	
 	private void drawStuff() {
@@ -85,7 +91,7 @@ public class Game extends JFrame implements KeyListener{
 
 	private void render(Graphics2D g) {
 		for(Drawable obj : objects) {
-			g.drawImage(obj.getBI(), (int) obj.getX(), (int) obj.getY(), 300, 300,null);
+			g.drawImage(obj.getBI(), (int) obj.getX(), (int) obj.getY(), Drawable.DRAWUNIT, Drawable.DRAWUNIT,null);
 		}
 	}
 	
@@ -93,10 +99,10 @@ public class Game extends JFrame implements KeyListener{
 	public void keyPressed(KeyEvent key) {
 		System.out.println(key);
 
+		//System.out.println(key.getKeyCode());
 		switch(key.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
 			quit = true;
-			System.out.println("Now Exiting...");
 			break;
 		default:
 			playerOneState[key.getKeyCode()] = true;
@@ -112,7 +118,9 @@ public class Game extends JFrame implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent key) {
-		// TODO Auto-generated method stub
+		switch(key.getKeyCode()) {
+		
+		}
 	}
 	
 	
