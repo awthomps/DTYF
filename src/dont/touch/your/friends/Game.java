@@ -2,10 +2,12 @@ package dont.touch.your.friends;
 
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+
 import javax.swing.JFrame;
 
 import dont.touch.your.friends.engine.World;
@@ -54,9 +56,9 @@ public class Game extends JFrame implements KeyListener{
 	}
 
 	private void loadGraphics() {
-		ImageManager.imageManager.add("", 1);
-		ImageManager.imageManager.add("", 1);
-		ImageManager.imageManager.add("", 1);
+		ImageManager.imageManager.add("res/characters/hair/Hair1_", 8, new Rectangle(50, 50));
+		ImageManager.imageManager.add("res/characters/hair/Hair2_", 8, new Rectangle(50, 50));
+		ImageManager.imageManager.add("res/characters/hair/Hair3_", 8, new Rectangle(50, 50));
 	}
 
 	private void initWorld() throws IOException {
@@ -78,6 +80,8 @@ public class Game extends JFrame implements KeyListener{
 			twoNPC[i] = new Rando(ImageManager.RANDO, playerTwo, playerOne, this.getWidth()/2, this.getHeight()/2);
 			world.add(twoNPC[i]);
 		}
+		
+		world.initCollision();
 	}
 	
 	private void gameLoop() {
@@ -85,6 +89,7 @@ public class Game extends JFrame implements KeyListener{
 		while(!quit) {
 			startTime = System.currentTimeMillis();
 			world.drawMove();
+			world.checkCollisions();
 			drawStuff();
 			
 			playerOne.drawMove();
