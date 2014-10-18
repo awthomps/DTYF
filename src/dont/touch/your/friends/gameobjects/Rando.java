@@ -3,10 +3,7 @@
  */
 package dont.touch.your.friends.gameobjects;
 
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import dont.touch.your.friends.engine.Vector2;
 
