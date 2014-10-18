@@ -16,17 +16,10 @@ import javax.swing.JFrame;
 
 import java.util.List;
 
-import de.hardcode.jxinput.JXInputManager;
-import de.hardcode.jxinput.directinput.DirectInputDevice;
-import de.hardcode.jxinput.event.JXInputAxisEvent;
-import de.hardcode.jxinput.event.JXInputAxisEventListener;
-import de.hardcode.jxinput.event.JXInputEventManager;
-import dont.touch.your.friends.controller.ControllerAxisListener;
-import dont.touch.your.friends.controller.ControllerButtonListener;
 import dont.touch.your.friends.gameobjects.Drawable;
 import dont.touch.your.friends.gameobjects.Player;
 
-public class Game extends JFrame implements KeyListener, JXInputAxisEventListener{
+public class Game extends JFrame implements KeyListener{
 	/**
 	 * 
 	 */
@@ -46,10 +39,6 @@ public class Game extends JFrame implements KeyListener, JXInputAxisEventListene
 		//this.setBackground(Color.BLACK);
 		bs = this.getBufferStrategy();
 		
-		System.out.println(System.getProperty("java.library.path"));
-		
-		initJXInputControllers();
-		
 		quit = false;
 		
 		playerOne = new Player("res/test/sample image.png");
@@ -57,25 +46,6 @@ public class Game extends JFrame implements KeyListener, JXInputAxisEventListene
 		objects.add(playerOne);
 		
 		gameLoop();
-	}
-
-	private void initJXInputControllers() {
-		System.out.println("Loading Controllers");
-		
-		System.load(System.getProperty("user.dir") + "\\lib\\JXInput_0.3.4\\jxinput.dll");
-		JXInputEventManager.setTriggerIntervall(50);
-		System.out.println("Number of controllers detected: " + JXInputManager.getNumberOfDevices());
-		for(int i = 0; i < JXInputManager.getNumberOfDevices(); ++i) {
-			if(JXInputManager.getJXInputDevice(i).getName().equals("Controller (Xbox 360 For Windows)")) {
-				DirectInputDevice xbox = new DirectInputDevice(i);
-				for(int j = 0; j < 2; j++) {
-					if(xbox.getAxis(j) != null) {
-						new ControllerAxisListener(xbox.getAxis(j));
-					}
-				}
-				new ControllerButtonListener(xbox.getButton(0));
-			}
-		}
 	}
 	
 	private void gameLoop() {
@@ -145,11 +115,5 @@ public class Game extends JFrame implements KeyListener, JXInputAxisEventListene
 		switch(key.getKeyCode()) {
 		
 		}
-	}
-
-	@Override
-	public void changed(JXInputAxisEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }
