@@ -1,6 +1,8 @@
 package dont.touch.your.friends.engine;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 import dont.touch.your.friends.gameobjects.Drawable;
@@ -47,7 +49,8 @@ public class World {
 
 	public void render(Graphics2D g) {
 		for(Drawable obj : objects) {
-			g.drawImage(obj.getBI(), (int) obj.getX(), (int) obj.getY(), Drawable.DRAWUNIT, Drawable.DRAWUNIT,null);
+			Rectangle rec = obj.getBounds();
+			g.drawImage(obj.getBI(), (int) obj.getX(), (int) obj.getY(), (int) rec.getWidth(), (int) rec.getHeight(),null);
 		}
 	}
 

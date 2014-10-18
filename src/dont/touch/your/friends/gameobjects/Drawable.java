@@ -41,6 +41,8 @@ public abstract class Drawable {
 		toDelete = false;
 	}
 	
+	public Rectangle getBounds() { return rect; }
+	
 	public void initCollision() {
 		rect = ImageManager.imageManager.getChunk(imageChunk).getBounds();
 	}
