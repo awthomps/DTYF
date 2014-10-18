@@ -9,6 +9,5 @@ public class Player extends Drawable {
 	
 	public Player(String uri) throws IOException {
 		bi = ImageIO.read(new File(uri));
-		System.out.println(bi);
 	}
 }
