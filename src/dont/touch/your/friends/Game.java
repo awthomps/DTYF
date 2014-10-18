@@ -1,6 +1,7 @@
 package dont.touch.your.friends;
 
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class Game extends JFrame implements KeyListener{
 		this.setVisible(true);
 		this.createBufferStrategy(2);
 		this.addKeyListener(this);
+		this.setTitle("DTYF");
+		this.setBackground(Color.BLACK);
 		bs = this.getBufferStrategy();
 		quit = false;
 		
@@ -63,7 +67,7 @@ public class Game extends JFrame implements KeyListener{
 
 	private void render(Graphics2D g) {
 		for(Drawable obj : objects) {
-			g.drawImage(obj.getBI(), 0, 0, 20, 20, null);
+			g.drawImage(obj.getBI(), 0, 0,null);
 		}
 	}
 	
