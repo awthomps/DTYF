@@ -22,7 +22,7 @@ public class Game extends JFrame implements KeyListener{
 	
 	private static long frameTime = 17;
 	private static final long serialVersionUID = 1L;
-	private static final int NPC_COUNT = 300;
+	private static final int NPC_COUNT = 30;
 	private BufferStrategy bs;
 	private boolean quit;
 	private World world;
