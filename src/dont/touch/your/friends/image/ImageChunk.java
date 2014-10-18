@@ -18,7 +18,7 @@ public class ImageChunk {
 		
 		for(int i = 0; i < number; ++i) {
 			try {
-				images.add(ImageIO.read(new File(imageNames + i)));
+				images.add(ImageIO.read(new File(imageNames + i + ".png")));
 			} catch (IOException e) {
 				System.err.println("BRAH THE FILES ALL WRONG MAN: " + imageNames + i + ".png");
 				try {

@@ -56,9 +56,9 @@ public class Game extends JFrame implements KeyListener{
 	}
 
 	private void loadGraphics() {
-		ImageManager.imageManager.add("", 1, new Rectangle(50, 50));
-		ImageManager.imageManager.add("", 1, new Rectangle(50, 50));
-		ImageManager.imageManager.add("", 1, new Rectangle(50, 50));
+		ImageManager.imageManager.add("res/characters/hair/Hair1_", 8, new Rectangle(50, 50));
+		ImageManager.imageManager.add("res/characters/hair/Hair2_", 8, new Rectangle(50, 50));
+		ImageManager.imageManager.add("res/characters/hair/Hair3_", 8, new Rectangle(50, 50));
 	}
 
 	private void initWorld() throws IOException {

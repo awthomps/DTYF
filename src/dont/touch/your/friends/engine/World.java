@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.util.LinkedList;
 
 import dont.touch.your.friends.gameobjects.Drawable;
-import dont.touch.your.friends.gameobjects.Player;
-import dont.touch.your.friends.gameobjects.Rando;
 
 public class World {
 	private LinkedList<Drawable> objects;
