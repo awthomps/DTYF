@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 import dont.touch.your.friends.engine.World;
+import dont.touch.your.friends.gameobjects.Backgound;
 import dont.touch.your.friends.gameobjects.Drawable;
 import dont.touch.your.friends.gameobjects.Player;
 import dont.touch.your.friends.image.ImageManager;
@@ -28,6 +29,7 @@ public class Game extends JFrame implements KeyListener{
 	private BufferStrategy bs;
 	private boolean quit;
 	private World world;
+	private Backgound background;
 	private Player playerOne;
 	private Player playerTwo;
 	
@@ -62,6 +64,7 @@ public class Game extends JFrame implements KeyListener{
 	}
 
 	private void initWorld() throws IOException {
+		background = new Backgound("");
 		world = new World();
 		
 		playerOne = new Player(ImageManager.PLAYER1IMAGE);
@@ -111,6 +114,7 @@ public class Game extends JFrame implements KeyListener{
 		Graphics2D g;
 		try {
 			g = (Graphics2D) bs.getDrawGraphics();
+			background.drawBackground(g, this.getWidth(), this.getHeight());
 			world.render(g);
 			g.dispose();
 			bs.show();
