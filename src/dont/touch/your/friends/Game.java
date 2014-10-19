@@ -56,9 +56,9 @@ public class Game extends JFrame implements KeyListener{
 	}
 
 	private void loadGraphics() {
-		ImageManager.imageManager.add("res/characters/hair/Hair1_", 8, new Rectangle(50, 50));
-		ImageManager.imageManager.add("res/characters/hair/Hair2_", 8, new Rectangle(50, 50));
-		ImageManager.imageManager.add("res/characters/hair/Hair3_", 8, new Rectangle(50, 50));
+		ImageManager.imageManager.add("res/characters/hair/Hair1_", 8, new Rectangle(Drawable.DRAWUNIT, (int) (Drawable.DRAWUNIT*1.5)));
+		ImageManager.imageManager.add("res/characters/hair/Hair2_", 8, new Rectangle(Drawable.DRAWUNIT, (int) (Drawable.DRAWUNIT*1.5)));
+		ImageManager.imageManager.add("res/characters/hair/Hair3_", 8, new Rectangle(Drawable.DRAWUNIT, (int) (Drawable.DRAWUNIT*1.5)));
 	}
 
 	private void initWorld() throws IOException {
@@ -91,9 +91,6 @@ public class Game extends JFrame implements KeyListener{
 			world.drawMove();
 			world.checkCollisions();
 			drawStuff();
-			
-			playerOne.drawMove();
-			playerTwo.drawMove();
 			
 			try {
 				

@@ -48,11 +48,55 @@ public abstract class Drawable {
 		toDelete = false;
 	}
 	
+	private void whichOneDirection() {
+		Vector2 dir = pos.sub(prevPos);
+		
+		if(dir.getX() > 0) {
+			if(dir.getY() > 0) {
+				//1
+				currentFrame = 1;
+			}
+			else if(dir.getY() < 0) {
+				//3
+				currentFrame = 3;
+			}
+			else if(dir.getY() == 0) {
+				//2
+				currentFrame = 2;
+			}
+		}
+		else if(dir.getX() < 0) {
+			if(dir.getY() > 0) {
+				//7
+				currentFrame = 7;
+			}
+			else if(dir.getY() < 0) {
+				//5
+				currentFrame = 5;
+			}
+			else if(dir.getY() == 0) {
+				//6
+				currentFrame = 6;
+			}
+		}
+		else if(dir.getY() < 0) {
+			//4
+			currentFrame = 4;
+		}
+		else if(dir.getY() > 0) {
+			//0
+			currentFrame = 0;
+		}
+	}
+	
+	public Rectangle getBounds() { return rect; }
+	
 	public void initCollision() {
 		rect = ImageManager.imageManager.getChunk(imageChunk).getBounds();
 	}
 
 	public BufferedImage getBI() {
+		whichOneDirection();
 		return ImageManager.imageManager.getChunk(imageChunk).getImageByIndex(currentFrame);
 	}
 

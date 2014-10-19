@@ -37,4 +37,8 @@ public class ImageManager {
 	public ImageChunk getChunk(int index) {
 		return chunks.get(index);
 	}
+	
+	public int getSize() {
+		return imageManager.getSize();
+	}
 }
