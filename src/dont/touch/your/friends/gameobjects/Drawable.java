@@ -15,6 +15,7 @@ public abstract class Drawable {
 	protected Vector2 prevPos = new Vector2(0,0);
 	
 	protected static final int STATE_COUNT = 5;
+	private static final int SWAP_COUNT = 15;
 	
 	public static final int LEFT = 0;
 	public static final int DOWN = 1;
@@ -22,6 +23,8 @@ public abstract class Drawable {
 	public static final int RIGHT = 3;
 	public static final int CHASE = 4;
 	public static final int RUN = 5;
+	
+	private int timeSinceSwitched = 0;
 	
 	
 	protected int speed = 5;
@@ -33,7 +36,11 @@ public abstract class Drawable {
 	Type type;
 
 	private boolean toDelete;
-
+	
+	public int getImageChunk(){
+		return imageChunk;
+	}
+	
 	protected Drawable(){
 		pos = new Vector2(0,0);
 		rect = new Rectangle();
@@ -100,9 +107,24 @@ public abstract class Drawable {
 		/**
 		 * TODO: handle what to do for each object. This can be overwritten in child classes
 		 */
+		timeSinceSwitched++;
 		
-		if(this instanceof Player && d2 instanceof Player)
+		if(timeSinceSwitched % SWAP_COUNT == 0){
+			imageChunk = (imageChunk + 1) % 3;
+		}
+		
+		
+		
+		
+		
+		if(this instanceof Player && d2 instanceof Player){
+			((Player) this).setTagged(!((Player) this).isTagged());
+			
+			
+			
 			System.out.println("Hey look, " + this + " collides with " + d2);
+		}
+		
 	}
 	
 	public boolean markedForDeletion() {

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.LinkedList;
 
 import dont.touch.your.friends.gameobjects.Drawable;
+import dont.touch.your.friends.gameobjects.Player;
 
 public class World {
 	private LinkedList<Drawable> objects;
@@ -46,8 +47,12 @@ public class World {
 	}
 
 	public void render(Graphics2D g) {
+		
 		for(Drawable obj : objects) {
 			g.drawImage(obj.getBI(), (int) obj.getX(), (int) obj.getY(), Drawable.DRAWUNIT, Drawable.DRAWUNIT,null);
+			if(obj instanceof Player){
+				System.err.println("ZACK debug " + obj.getImageChunk());
+			}
 		}
 	}
 

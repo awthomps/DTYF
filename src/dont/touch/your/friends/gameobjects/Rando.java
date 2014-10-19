@@ -18,7 +18,7 @@ public class Rando extends Drawable{
 	private static final int minRandomTimer = 80;
 	private static final int maxRandomTimer = 150;
 	private int timeSinceRefresh = 0;
-	private static final int SWARM_DISTANCE = 150;
+	private static final int SWARM_DISTANCE = 500;
 
 
 

@@ -13,7 +13,7 @@ public class Player extends Drawable {
 	
 	public Player(int ic, int startX, int startY) {
 		super();
-		isTagged = false;
+		setTagged(false);
 		imageChunk = ic;
 		
 		// This is the position of the player.  Should be different per player
@@ -21,5 +21,13 @@ public class Player extends Drawable {
 	}
 	public Vector2 getVector(){
 		return pos;
+	}
+
+	public boolean isTagged() {
+		return isTagged;
+	}
+
+	public void setTagged(boolean isTagged) {
+		this.isTagged = isTagged;
 	}
 }
