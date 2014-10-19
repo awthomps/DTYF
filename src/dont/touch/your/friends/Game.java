@@ -64,7 +64,7 @@ public class Game extends JFrame implements KeyListener{
 	}
 
 	private void initWorld() throws IOException {
-		background = new Backgound("");
+		background = new Backgound("backgrounds/Parking_Lot_Backdrop.png");
 		world = new World();
 		
 		playerOne = new Player(ImageManager.PLAYER1IMAGE);
